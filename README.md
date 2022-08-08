@@ -48,7 +48,7 @@ The directory structure of your new project looks like this:
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   ├── raw            <- The original, immutable data dump.
-│   └── **meta**
+│   └── **meta**       <-
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
@@ -70,21 +70,21 @@ The directory structure of your new project looks like this:
 ├── poetry.lock      <- The requirements file for hard repdorucibility of the environment
 │
 ├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
+|   └── <repo name> <- Demanded by `poetry` in `src` mode
+│       ├── __init__.py    <- Makes src a Python module
+│       │
+│       ├── data           <- Submodule for data generation & processing
+            ├── __init__.py    <- Makes the directory a Python module
+            └── _data.py   <- Submodule code. The underscore "_" reflects that it's private code of the submodule and the file can be named whatever, or it can be multiple files with "_"; regardless, `__init__.py` should expose module as `data`, not as `_data`; this convention is inspired by `sklearn` repository structure.
+        ├── analytics <- code for datavis/summaries/reporting
+        ├── modeling
+        ├── experimental
+            ├── _data.py
+            ├── _analytics.py
+            ├── _modeling.py
+│   
 │
-└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+└── tests            <- folder with unit tests
+    ├── __init__.py
+    ├── test_<repo name>.py
 ```
