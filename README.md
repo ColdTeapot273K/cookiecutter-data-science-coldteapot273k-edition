@@ -49,6 +49,9 @@ The directory structure of your new project looks like this:
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   ├── raw            <- The original, immutable data dump.
 │   └── **meta**       <-
+
+├── conf <- configs
+├── cli <- cli scripts
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
