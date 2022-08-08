@@ -20,6 +20,9 @@ Main differences:
   - `examples` for very stable / reproducible /"gold standard" code (especially good for quick onboarding)
   - `sandbox` for personal directories or any kind of contained disorder
   - => enables multiple good practices
+- Modified `src` directory structure
+  - to properly accomodate `poetry` `src`-based workflow (`poetry` has some rules here)
+  - to make module structure more reasonable for use as python modules
 
 ---
 The directory structure of your new project looks like this:
