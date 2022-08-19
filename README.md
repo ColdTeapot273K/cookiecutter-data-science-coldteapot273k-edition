@@ -29,12 +29,14 @@ Main differences:
 - Modified `/src` directory structure 
   - to properly accomodate `poetry` `src`-based workflow (`poetry` has some rules here)
   - to make module structure more reasonable for use as python modules
+  - the underscore "_" reflects that it's private code of the submodule and the file can be named whatever, or it can be multiple files with "_"; regardless, `__init__.py` should expose module as `data`, not as `_data`; this convention is inspired by `sklearn` repository structure.
 - Add `/artefacts` directory (replaces `/models` directory)
   - a place for everything serialized (including models)
 - Removed `/reports` directory
   - ideally reports should be experiment management frameworks (to ensure reproduciiblity)
   - can leverage `/notebooks/reports` for notebook-produced report materials
   - `Powerpoint` reports, if they are needed, better go into `/references`
+ 
 
 ---
 The directory structure of your new project looks like this:
@@ -51,18 +53,20 @@ The directory structure of your new project looks like this:
 │   └── **meta**       <-
 
 ├── conf <- configs
-├── cli <- cli scripts
+    └── **base** <- reference example/standard configs
+    └── **local** <- custom/personal configs
+├── **cli** <- cli scripts
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
 ├── **artefacts**      <- Serialized fitted models/pipelines/python objects/etc
 │
-├── *notebooks*        <- Jupyter notebooks. Naming convention is: 
+├── *experiments*        <- Jupyter notebooks / scripts of experiments. Naming convention is: 
 │   |                     <the creator's initials>-<description>-<version>-<more specific description>-<version>
-│   ├── **examples**   <- 
-│   ├── *reports*    <- 
-│   └── **sandbox**    <-
-|       ├── <creator_1>  <-
+│   ├── **examples**   <- "Golden" notebooks/scripts for reference (highly reproducible examples of pipelines)
+│   ├── *reports*    <- Clean notebooks for showcase / htmls / plots
+│   └── **sandbox**    <- For personal dirty experiments (any work-in-progress mess should be contained here preferably)
+|       ├── <creator_1>  <- A directory for each user
 |       └── <creator_2>
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
@@ -78,16 +82,29 @@ The directory structure of your new project looks like this:
 │       │
 │       ├── data           <- Submodule for data generation & processing
             ├── __init__.py    <- Makes the directory a Python module
-            └── _data.py   <- Submodule code. The underscore "_" reflects that it's private code of the submodule and the file can be named whatever, or it can be multiple files with "_"; regardless, `__init__.py` should expose module as `data`, not as `_data`; this convention is inspired by `sklearn` repository structure.
+            └── _data.py   <- Submodule code. 
         ├── analytics <- code for datavis/summaries/reporting
-        ├── modeling
-        ├── experimental
+            ├── __init__.py    <- Makes the directory a Python module
+            └── _analytics.py <- Submodule code
+        ├── modeling <- code for modeling (e.g. custom implementations)
+            ├── __init__.py    <- Makes the directory a Python module
+            └── _modeling.py <- Submodule code
+        ├── utils <- small utilities like metric computation functions
+            ├── __init__.py    <- Makes the directory a Python module
+            └── _utils.py <- Submodule code
+        ├── pipelines <- WIP; should be a pipeline catalogue of sorts (see Kedro); perhaps should live near the /conf directory instead/
+            ├── __init__.py    <- Makes the directory a Python module
+            └── _pipelines.py <- Submodule code
+        └── experimental <- anything not stable / tested enough to be promoted to into dedicated submodules
             ├── _data.py
             ├── _analytics.py
             ├── _modeling.py
+            ├── _utils.py
+            └── _pipelines.py <- Submodule code
+            
 │   
 │
 └── tests            <- folder with unit tests
     ├── __init__.py
-    ├── test_<repo name>.py
+    ├── test_<repo name>.py <- the most basic test - importing the project as a module (es created by `poetry` automatically)
 ```
