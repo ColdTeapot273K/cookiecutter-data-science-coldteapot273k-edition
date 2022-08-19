@@ -3,6 +3,9 @@
 An opinionated (but hopefully still welcoming and accessible) take on popular [cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science) project template.
 
 Main differences:
+- */**
+  - New directories VS original template are marked w/ **
+  - Modified directories VS original template are marked w/ *
 - Ditch the notions of script-based workflow in favor of modular pipeline-based workflow (akin to [kedro](https://github.com/kedro-org/kedro), or anything DAG, like Airflow). This implies that:
   - we leverage python modules instead of python scripts where appropriate
   - we design pipelines (and preferably record them in some pipeline catalog, like proposed by [kedro](https://github.com/kedro-org/kedro)) as a series of python callables instead of shell executables
@@ -50,11 +53,11 @@ The directory structure of your new project looks like this:
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   ├── raw            <- The original, immutable data dump.
-│   └── **meta**       <-
-
+│   └── **meta**       <- Metadata
+│
 ├── conf <- configs
-    └── **base** <- reference example/standard configs
-    └── **local** <- custom/personal configs
+│   ├── **base** <- reference example/standard configs
+│   └── **local** <- custom/personal configs
 ├── **cli** <- cli scripts
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
@@ -81,30 +84,30 @@ The directory structure of your new project looks like this:
 │       ├── __init__.py    <- Makes src a Python module
 │       │
 │       ├── data           <- Submodule for data generation & processing
-            ├── __init__.py    <- Makes the directory a Python module
-            └── _data.py   <- Submodule code. 
-        ├── analytics <- code for datavis/summaries/reporting
-            ├── __init__.py    <- Makes the directory a Python module
-            └── _analytics.py <- Submodule code
-        ├── modeling <- code for modeling (e.g. custom implementations)
-            ├── __init__.py    <- Makes the directory a Python module
-            └── _modeling.py <- Submodule code
-        ├── utils <- small utilities like metric computation functions
-            ├── __init__.py    <- Makes the directory a Python module
-            └── _utils.py <- Submodule code
-        ├── pipelines <- WIP; should be a pipeline catalogue of sorts (see Kedro); perhaps should live near the /conf directory instead/
-            ├── __init__.py    <- Makes the directory a Python module
-            └── _pipelines.py <- Submodule code
-        └── experimental <- anything not stable / tested enough to be promoted to into dedicated submodules
-            ├── _data.py
-            ├── _analytics.py
-            ├── _modeling.py
-            ├── _utils.py
-            └── _pipelines.py <- Submodule code
-            
+│       │   ├── __init__.py    <- Makes the directory a Python module
+│       │   └── _data.py   <- Submodule code. 
+│       ├── analytics <- code for datavis/summaries/reporting
+│       │   ├── __init__.py    <- Makes the directory a Python module
+│       │   └── _analytics.py <- Submodule code
+│       ├── modeling <- code for modeling (e.g. custom implementations)
+│       │   ├── __init__.py    <- Makes the directory a Python module
+│       │   └── _modeling.py <- Submodule code
+│       ├── utils <- small utilities like metric computation functions
+│       │   ├── __init__.py    <- Makes the directory a Python module
+│       │   └── _utils.py <- Submodule code
+│       ├── pipelines <- WIP; should be a pipeline catalogue of sorts (see Kedro); perhaps should live near the /conf directory instead/
+│       │   ├── __init__.py    <- Makes the directory a Python module
+│       │   └── _pipelines.py <- Submodule code
+│       └── experimental <- anything not stable / tested enough to be promoted to into dedicated submodules
+│           ├── _data.py
+│           ├── _analytics.py
+│           ├── _modeling.py
+│           ├── _utils.py
+│           └── _pipelines.py <- Submodule code
+│           
 │   
 │
 └── tests            <- folder with unit tests
     ├── __init__.py
-    ├── test_<repo name>.py <- the most basic test - importing the project as a module (es created by `poetry` automatically)
+    └── test_<repo name>.py <- the most basic test - importing the project as a module (es created by `poetry` automatically)
 ```
